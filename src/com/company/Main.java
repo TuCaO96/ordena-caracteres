@@ -17,13 +17,13 @@ public class Main {
         Charset encoding = Charset.defaultCharset();
 
         try {
-            out.println("Started");
+            out.println("Started at " + new Date().toString());
             handleFile(input, encoding);
         } catch (IOException e) {
             out.println(e.getMessage());
         }
 
-        System.out.println("Executed in: " + ((System.currentTimeMillis() - timestamp) / 1000));
+        System.out.println("Executed in: " + ((System.currentTimeMillis() - timestamp) / 1000) + " seconds");
     }
 
     private static void handleFile(File file, Charset encoding)
@@ -42,7 +42,7 @@ public class Main {
         while ((r = reader.read()) != -1) {
             char ch = (char) r;
             //get only digits and letters that are lowercase
-            if (Character.isDigit(ch) || (Character.isLetter(ch) && Character.isLowerCase(ch))) {
+            if (Character.isDigit(ch) || (Character.isLetter(ch) && Character.isLowerCase(ch) && (int)ch < 123)) {
                 //add character if not in map
                 if(!asciiCodes.containsKey(ch)){
                     asciiCodes.put(ch, 1);
