@@ -12,19 +12,18 @@ public class Main {
     private static Map<Character,Integer> asciiCodes = new HashMap<>();
 
     public static void main(String[] args) {
-        long startTime = System.nanoTime();
         final long timestamp = System.currentTimeMillis();
         // replace this with a known encoding if possible
         Charset encoding = Charset.defaultCharset();
 
         try {
-            out.println("Iniciado em: " + timestamp);
+            out.println("Started");
             handleFile(input, encoding);
         } catch (IOException e) {
             out.println(e.getMessage());
         }
 
-        System.out.println("Executado em: " + System.currentTimeMillis());
+        System.out.println("Executed in: " + ((System.currentTimeMillis() - timestamp) / 1000));
     }
 
     private static void handleFile(File file, Charset encoding)
