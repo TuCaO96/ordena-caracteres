@@ -37,8 +37,6 @@ public class Main {
 
     private static void handleCharacters(Reader reader)
             throws IOException {
-        ArrayList<Character> characters = new ArrayList<>();
-
         int r;
 
         while ((r = reader.read()) != -1) {
