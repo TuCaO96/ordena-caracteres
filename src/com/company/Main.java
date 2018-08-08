@@ -43,12 +43,15 @@ public class Main {
 
         while ((r = reader.read()) != -1) {
             char ch = (char) r;
+            //get only digits and letters that are lowercase
             if (Character.isDigit(ch) || (Character.isLetter(ch) && Character.isLowerCase(ch))) {
+                //add character if not in map
                 if(!asciiCodes.containsKey(ch)){
                     asciiCodes.put(ch, 1);
                     continue;
                 }
 
+                //count characters
                 asciiCodes.merge(ch, 1, (v1, v2) ->
                 {
                     return v1 + v2;
@@ -60,10 +63,12 @@ public class Main {
         reader.close();
 
         if (!output.exists()) {
+            //create file if not exists
             output.createNewFile();
         }
 
         try {
+            //print all the characters for each one included. already ordered via SortedSet
             PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(output)));
             SortedSet<Character> keys = new TreeSet<>(asciiCodes.keySet());
             for (Character key : keys) {
@@ -71,7 +76,9 @@ public class Main {
                     writer.print(key);
                 }
             }
+            //flush write
             writer.flush();
+            //close
             writer.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
