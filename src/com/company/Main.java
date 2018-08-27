@@ -10,6 +10,7 @@ public class Main {
     private static final File input = new File("H:\\original.txt");
     private static HashMap<Character, AsciiEntry> asciiCodes = new HashMap<>();
     private static final File output = new File("H:\\output2.txt");
+    private static int numThreads = 0;
 
     static boolean finished = false;
 
@@ -32,7 +33,7 @@ public class Main {
         try {
             out.println("Started at " + new Date().toString());
             ReadFile readFile = new ReadFile();
-            readFile.handleFile(input, encoding);
+            boolean finished = readFile.handleFile(input, encoding);
         } catch (IOException e) {
             out.println(e.getMessage());
         }

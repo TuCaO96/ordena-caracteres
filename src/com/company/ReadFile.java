@@ -18,16 +18,16 @@ public class ReadFile{
     static long write;
     static long timestamp = System.currentTimeMillis();
 
-    public void handleFile(File file, Charset encoding)
+    public boolean handleFile(File file, Charset encoding)
             throws IOException {
         try (InputStream in = new FileInputStream(file);
              // buffer for efficiency
              Reader buffer = new BufferedReader(new InputStreamReader(in, encoding))) {
-            handleCharacters(buffer);
+            return handleCharacters(buffer);
         }
     }
 
-    private void handleCharacters(Reader reader)
+    private boolean handleCharacters(Reader reader)
             throws IOException {
         int r;
 
@@ -78,8 +78,8 @@ public class ReadFile{
             writer.flush();
             //close
             writer.close();
-            finished = true;
             System.out.println("Writed in: " + ((System.currentTimeMillis() - timestamp) / 10) + " seconds");
+            finished = true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -88,6 +88,6 @@ public class ReadFile{
             e.printStackTrace();
         }
 
-
+        return true;
     }
 }
